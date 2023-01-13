@@ -1,21 +1,43 @@
-bibli_nume
-lucratorbibli_nume
-bibli_locatie
+bibli_nume a
+lucratorbibli_nume a
+bibli_locatie a
 12
 1
-1
-carte_nume
-carte_autor
-carte_editura
+3
+carte_nume a
+carte_autor a
+carte_editura a
 carte_gen
 20
 112
 1
+2
+carte_nume b
+carte_autor b
+carte_editura b
+carte_gen
+21
+126
+2
+2
+carte_nume c
+carte_autor c
+carte_editura c
+carte_gen
+21
+127
 1
 1
-rev_titlu
-revista_editura
+2
+rev_titlu a
+revista_editura a
 121
 11
 1
+2
+rev_titlu b
+revista_editura b
+126
+11
+2
 2
