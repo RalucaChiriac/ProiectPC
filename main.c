@@ -39,9 +39,8 @@ typedef struct
 
 int n_carti, n_reviste, ok_reviste, ok_carti;
 
-carte& cautare_carte(char nume[100], biblioteca a)
+carte cautare_carte(char nume[100], biblioteca a)
 {
-
     for (int i=0;i<n_carti;i++)
     {
         if (strcmp(a.carti[i].titlu, nume) == 0)
@@ -60,7 +59,7 @@ int cautare_carte_verificare (char nume[100], biblioteca a)
     return 0;
 }
 
-revista& cautare_revista(char nume[101], biblioteca a)
+revista cautare_revista(char nume[101], biblioteca a)
 {
     for (int i=0;i<n_reviste;i++)
     {
@@ -146,7 +145,7 @@ int main()
 
     /// printf("Introduceti locatia bibliotecii \n");
     char nume3[101];
-    fscanf(f,"%c",&temp);
+    fscanf(f,"%c",&temp);   /// ca sa pot citi cu spatii
     fscanf(f,"%[^\n]", nume3);
     strcpy(a.locatie,nume3);
 
@@ -297,13 +296,12 @@ meniu:
    printf("4. Afisati articolele imprumutate / neimprumutate \n");
    printf("5. Afisati detaliile despre o carte \n");
    printf("6. Afisati detaliile despre o revista \n");
-   printf("7. Schimbati statusul de inchiriere a unei carti sau a unei reviste \n");
-   printf("8. Eliminati carti din biblioteca \n");
-   printf("9. Eliminati reviste din biblioteca \n");
-   printf("10. Adaugati un numar dat de carti in biblioteca \n");
-   printf("11. Adaugati un numar dat de reviste in biblioteca \n");
+   printf("7. Eliminati carti din biblioteca \n");
+   printf("8. Eliminati reviste din biblioteca \n");
+   printf("9. Adaugati un numar dat de carti in biblioteca \n");
+   printf("10. Adaugati un numar dat de reviste in biblioteca \n");
    printf("\n \n");
-   printf("12. Iesiti din program \n");
+   printf("11. Iesiti din program \n");
    printf("\n \n");
    printf("Introduceti numarul optinuii pe care doriti sa o executati, DOAR NUMARUL, dupa care apasati tasta ENTER! \n");
    int raspuns;
@@ -326,13 +324,13 @@ meniu:
             printf("                   ------ Afisarea s-a sfarsit ------   \n");
             printf("        ------ Apasati tasta ENTER pentru a afisa meniul -------       \n");
             char ch;
-           ch=getchar();
+           ch=getchar();   /// verifica daca s-a apasat tasta enter
            fflushstdin();
            if(ch=='\n')
             {
                 #ifdef _WIN32
                     system("cls");
-                #endif // _WIN32
+                #endif // _WIN32         /// comenzile pentru golirea de ecran portabile
                 #ifdef linux
                     system("clear");
                 #endif // linux
@@ -714,267 +712,8 @@ meniu:
        goto meniu;
     }
 
+
    case 7:
-    {
-        printf("Pentru a schimba statusul de inchiriere al unei CARTI apasati tasta 1, iar pentru al unei REVISTE apasati tasta 2  \n");
-        int raspuns_local;
-        scanf("%d", &raspuns_local);
-        #ifdef _WIN32
-            system("cls");
-        #endif // _WIN32
-        #ifdef linux
-            system("clear");
-        #endif // linux
-        #ifdef __APPLE__
-            system("clear");
-        #endif // apple
-        if (raspuns_local == 1)
-        {
-            printf("Introduceti numele cartii pentru care doriti sa schimbati statusul inchirierii! \n");
-            char nume_temp1[100];
-            char temp;
-
-            scanf("%c",&temp);
-            scanf("%[^\n]",nume_temp1);
-            printf("\n");
-
-            if (cautare_carte_verificare(nume_temp1,a) == 1)
-            {
-                printf("Statusul cartii este: %s \n", (cautare_carte(nume_temp1,a).stat==neimprumutat)?"neimprumutata":"imprumutata" );
-                printf("\n");
-
-                if (cautare_carte(nume_temp1,a).stat==neimprumutat)
-                {
-                    printf("Doriti sa schimbati statusul cartii in NEIMPRUMUTATA ? \n");
-                    printf("Scrieti 'd' pentru confirmare sau  'n' in caz contrar. \n");
-
-                    char ch[3];
-                    scanf("%s",ch);
-                    //fflushstdin();
-                    if(strcmp("d",ch) == NULL)
-                    {
-                        cautare_carte(nume_temp1,a).stat=imprumutat;
-
-                        printf("                   ------ Modificare efectuala! ------   \n");
-                        printf("        ------ Apasati tasta ENTER pentru a afisa meniul -------       \n");
-                        char ch1;
-                       ch1=getchar();
-                       fflushstdin();
-                       if(ch1=='\n')
-                        {
-                            #ifdef _WIN32
-                                system("cls");
-                            #endif // _WIN32
-
-                            #ifdef linux
-                                system("clear");
-                            #endif // linux
-
-                            #ifdef __APPLE__
-                                system("clear");
-                            #endif // apple
-                        }
-                       goto meniu;
-                    }
-                    else
-                        {
-                            printf("        ------ Apasati tasta ENTER pentru a va intoarce la meniul principal -------       \n");
-                           char ch1;
-                           ch1=getchar();
-                           fflushstdin();
-                           if(ch1=='\n')
-                            {
-                                #ifdef _WIN32
-                                    system("cls");
-                                #endif // _WIN32
-
-                                #ifdef linux
-                                    system("clear");
-                                #endif // linux
-
-                                #ifdef __APPLE__
-                                    system("clear");
-                                #endif // apple
-                            }
-                           goto meniu;
-                        }
-                }
-                else
-                {
-                    printf("Doriti sa schimbati statusul cartii in NEIMPRUMUTATA ? \n");
-                    printf("Scrieti 'd' pentru confirmare sau  'n' in caz contrar. \n");
-
-                    char ch[3];
-                    scanf("%s",ch);
-                    //fflushstdin();
-                    if(strcmp("d",ch) == NULL)
-                    {
-                        cautare_carte(nume_temp1,a).stat=neimprumutat;
-
-                        printf("                   ------ Modificare efectuala! ------   \n");
-                        printf("        ------ Apasati tasta ENTER pentru a afisa meniul -------       \n");
-                        char ch1;
-                       ch1=getchar();
-                       fflushstdin();
-                       if(ch1=='\n')
-                        {
-                            #ifdef _WIN32
-                                system("cls");
-                            #endif // _WIN32
-                            #ifdef linux
-                                system("clear");
-                            #endif // linux
-                            #ifdef __APPLE__
-                                system("clear");
-                            #endif // apple
-                        }
-                       goto meniu;
-                    }
-                    else
-                        {
-                            printf("        ------ Apasati tasta ENTER pentru a va intoarce la meniul principal -------       \n");
-                           char ch1;
-                           ch1=getchar();
-                           fflushstdin();
-                           if(ch1=='\n')
-                            {
-                                #ifdef _WIN32
-                                    system("cls");
-                                #endif // _WIN32
-                                #ifdef linux
-                                    system("clear");
-                                #endif // linux
-                                #ifdef __APPLE__
-                                    system("clear");
-                                #endif // apple
-                            }
-                           goto meniu;
-                        }
-                }
-            }
-        }
-        else
-            {
-            printf("Introduceti numele revistei pentru care doriti sa schimbati statusul inchirierii! \n");
-            char nume_temp1[100];
-            char temp;
-
-            scanf("%c",&temp);
-            scanf("%[^\n]",nume_temp1);
-            printf("\n");
-
-            if (cautare_carte_verificare(nume_temp1,a) == 1)
-            {
-               printf("Statusul revistei este: %s \n", (cautare_revista(nume_temp1,a).stat==neimprumutat)?"neimprumutata":"imprumutata" );
-                printf("\n");
-
-                if (cautare_revista(nume_temp1,a).stat==neimprumutat)
-                {
-                    printf("Doriti sa schimbati statusul revistei in NEIMPRUMUTATA ? \n");
-                    printf("Scrieti 'd' pentru confirmare sau  'n' in caz contrar. \n");
-                    char ch[3];
-                    scanf("%s",ch);
-                    //fflushstdin();
-                    if(strcmp("d",ch) == NULL)
-                    {
-                        cautare_revista(nume_temp1,a).stat=imprumutat;
-                        printf("                   ------ Modificare efectuala! ------   \n");
-                        printf("        ------ Apasati tasta ENTER pentru a afisa meniul -------       \n");
-                        char ch1;
-                       ch1=getchar();
-                       fflushstdin();
-                       if(ch1=='\n')
-                        {
-                            #ifdef _WIN32
-                                system("cls");
-                            #endif // _WIN32
-                            #ifdef linux
-                                system("clear");
-                            #endif // linux
-                            #ifdef __APPLE__
-                                system("clear");
-                            #endif // apple
-                        }
-                       goto meniu;
-                    }
-                    else
-                        {
-                            printf("        ------ Apasati tasta ENTER pentru a va intoarce la meniul principal -------       \n");
-                           char ch1;
-                           ch1=getchar();
-                           fflushstdin();
-                           if(ch1=='\n')
-                            {
-                                #ifdef _WIN32
-                                    system("cls");
-                                #endif // _WIN32
-                                #ifdef linux
-                                    system("clear");
-                                #endif // linux
-                                #ifdef __APPLE__
-                                    system("clear");
-                                #endif // apple
-                            }
-                           goto meniu;
-                        }
-                }
-                else
-                {
-                    printf("Doriti sa schimbati statusul revistei in NEIMPRUMUTATA ? \n");
-                    printf("Scrieti 'd' pentru confirmare sau  'n' in caz contrar. \n");
-                    char ch[3];
-                    scanf("%s",ch);
-                    //fflushstdin();
-                    if(strcmp("d",ch) == NULL)
-                    {
-                        cautare_revista(nume_temp1,a).stat=neimprumutat;
-
-                        printf("                   ------ Modificare efectuala! ------   \n");
-                        printf("        ------ Apasati tasta ENTER pentru a afisa meniul -------       \n");
-                        char ch1;
-                       ch1=getchar();
-                       fflushstdin();
-                       if(ch1=='\n')
-                        {
-                            #ifdef _WIN32
-                                system("cls");
-                            #endif // _WIN32
-
-                            #ifdef linux
-                                system("clear");
-                            #endif // linux
-
-                            #ifdef __APPLE__
-                                system("clear");
-                            #endif // apple
-                        }
-                       goto meniu;
-                    }
-                    else
-                        {
-                            printf("        ------ Apasati tasta ENTER pentru a va intoarce la meniul principal -------       \n");
-                           char ch1;
-                           ch1=getchar();
-                           fflushstdin();
-                           if(ch1=='\n')
-                            {
-                                #ifdef _WIN32
-                                    system("cls");
-                                #endif // _WIN32
-                                #ifdef linux
-                                    system("clear");
-                                #endif // linux
-                                #ifdef __APPLE__
-                                    system("clear");
-                                #endif // apple
-                            }
-                           goto meniu;
-                        }
-                }
-            }
-        }
-    }
-   case 8:
     {
         printf("Introduceti titlurilor cartilor unul cate unul urmate de tasta ENTER dupa fiecare nume! \n");
         printf("Daca doriti sa va opriti, tastati 'stop' ! \n");
@@ -1036,7 +775,7 @@ meniu:
         }
     }
 
-   case 9:
+   case 8:
     {
         printf("Introduceti numele revistelor unul cate unul urmate de tasta ENTER dupa fiecare nume! \n");
         printf("Daca doriti sa va opriti, tastati 'stop' ! \n");
@@ -1096,7 +835,7 @@ meniu:
         }
     }
 
-   case 10:
+   case 9:
     {
         printf("Cate carti doriti sa adaugati? \n");
         int local=0;
@@ -1183,7 +922,7 @@ meniu:
         }
        goto meniu;
     }
-   case 11:
+   case 10:
     {
         printf("Cate reviste doriti sa adaugati? \n");
         int local=0;
@@ -1258,7 +997,7 @@ meniu:
 
        goto meniu;
     }
-   case 12:
+   case 11:
     {
         #ifdef _WIN32
             system("cls");
